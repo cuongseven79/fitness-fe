@@ -1,0 +1,8 @@
+.googleBtn {
+  border-radius: 30px !important;
+  margin-top: 15px;
+}
+
+.googleBtn > div {
+  background-color: transparent !important;
+}

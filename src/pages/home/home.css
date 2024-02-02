@@ -1,0 +1,421 @@
+.main__header{
+    width: 100vw;
+    height: calc(100vh - 3.49rem);
+    display: grid;
+    place-items: center;
+    margin-top: 3rem;
+}
+
+.main__header-container{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6rem;
+}
+
+.main__header-left {
+    margin-top: -3rem;
+}
+
+.main__header-left h2 {
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+    font-weight: 400;
+    font-size: 1.8rem;
+}
+
+.main__header-left p {
+    margin: 1rem 0 3.5rem;
+    font-size: 1.1rem;
+}
+
+.main__header-right {
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.main__header-circle {
+    width: 25rem;
+    height: 25rem;
+    background: linear-gradient(75deg, var(--color-secondary), transparent);
+    border-radius: 50%;
+    position: absolute;
+    transition: var(--transition); 
+    filter: blur(15px);
+}
+
+.main__header-image {
+    position: relative;
+}
+
+.main__header-right:hover .main__header-circle {
+    filter: none;
+}   
+
+
+
+/******************** TRAINERS STYLES ********************/
+.trainers {
+    margin-top: 4rem;
+}
+
+.trainer__wrapper {
+    display: grid;
+     grid-template-columns: repeat(4, 1fr); 
+    gap: 3rem;
+    margin-top: 4rem;
+}
+.trainers__image {
+    filter: saturate(0.25);
+    transition: var(--transition);
+}
+
+.trainers__image:hover {
+    filter: saturate(1);
+    transition: var(--transition);
+}
+.trainers__program:hover a {
+    background: var(--color-secondary);
+    color: var(--color-gray-600);
+}
+
+
+
+
+/******************** PROGRAMS STYLES ********************/
+.programs__container{
+    display: grid;
+    grid-template-columns: 38% 50%;
+    gap: 12%;
+}
+
+/* .programs__image {
+    filter: saturate(0.25);
+    transition: var(--transition);
+} */
+
+/* .programs__image:hover {
+    filter: saturate(1);
+    transition: var(--transition);
+}
+
+.programs__right > p {
+    margin: 1.5rem 0 2rem;
+} */
+
+/* .programs__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3.4rem 2.4rem;
+} */
+
+/*
+.card.programs__card {
+    padding-top: 3.5rem;
+    text-align: left;
+    position: relative;
+}
+
+.card.programs__card span {
+    position: absolute;
+    top: -1.5rem;
+}
+*/
+
+
+
+/******************** FAQ STYLES ********************/
+
+.faqs__wrapper{
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 5rem;
+    /* flex start makes it align automatically even when not clicked on */
+    align-items: flex-start; 
+}
+
+.faq {
+    background: var(--color-gray-500);
+    padding: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.faq div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq__icon {
+    background: transparent;
+    color: var(--color-gray-100);
+    font-size: 1.5rem;
+}
+
+.faq p {
+    margin-top: 1.5rem;
+}
+
+
+
+/******************** TESTIMONIAL STYLES ********************/
+
+.testimonials {
+    width: 50rem;
+    margin-inline: auto; /*make it at the middle*/
+}
+
+.testimonials__head {
+    justify-content: center;
+}
+
+.card.testimonial {
+    position: relative;
+    text-align: left;
+    margin-top: 5rem;
+}
+
+.testimonial__avatar {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1.5rem;
+    border: 2px solid transparent;
+    overflow: hidden;
+    top: -2rem;
+    left: calc(50% - 2rem);
+    box-shadow: 0 1.5rem 2rem rgba(26, 26, 54, 0.4) ;
+    transition: var(--transition);
+}
+.testimonials__btn svg {
+    fill: var(--color-primary);
+}
+.testimonial:hover .testimonial__avatar{
+    border-radius: 50%;
+    border-color: var(--color-gray-400);
+}
+
+.testimonial__quote {
+    font-style: italic;
+    margin: 1rem 0 2rem;
+}
+
+.card small.testimonial__title {
+    margin-top: 0.3rem;
+}
+
+.testimonial__btn-container {
+    width: fit-content;
+    margin: 2.5rem auto 0;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonials__btn {
+    background: transparent;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.testimonials__btn svg {
+    font-size: 1.8rem;
+    width: 3rem;
+    height: 3rem;
+}
+.testimonials__btn:hover svg {
+    fill: var(--color-secondary);
+    color: var(--color-gray-600);
+    font-size: 1.8rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+/******************** FOOTER STYLES ********************/
+footer {
+    background: var(--color-primary);
+    margin-top: 7rem; 
+    padding-top: 7rem;
+    font-size: 0.9rem;
+    color: var(--color-gray-100)
+}
+
+.footer__container {
+    display: grid;
+    grid-template-columns: 26rem 1fr 1fr 1fr;
+    gap: 4rem;
+}
+
+.footer__container article {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+}
+
+.footer__container article p {
+    margin-top: 0.5rem;
+}
+
+.footer__container article h4 {
+    margin-bottom: 0.6rem;
+    font-size: 1rem;
+}
+
+.footer__socials {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer__socials a{
+    background: var(--color-gray-100);
+   padding: 0.3rem 0.7rem;
+    border: 1px solid transparent;
+    border-radius: 0.6rem;
+    transition: var(--transition);
+}
+
+.footer__socials a svg {
+    color: var(--color-gray-600);
+}
+
+.footer__socials a:hover {
+    border-color: var(--color-gray-100);
+    background: transparent;
+}
+
+.footer__copyright {
+    color: var(--color-gray-100);
+    text-align: center;
+    padding: 1.5rem 0;
+    border-top: 2px solid var(--color-primary-variant);
+    margin-top: 5rem;
+}
+
+/******************** MEADIA QUERIES (medium screens) ********************/
+@media screen and (max-width: 1024px) {
+    /* MAIN HEADER */
+    .main__header {
+        height: fit-content;
+        padding: 12rem 0;
+    }
+    .main__header-container {
+        gap: 0;
+    }
+
+    .main__header-circle {
+        width: 16rem;
+        height: 16rem;
+    }
+
+    /* PROGRAMS */
+    .trainer__wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* VALUES */
+    .values__container {
+        grid-template-columns: 1fr;
+        justify-content: center;
+        gap: 4rem;
+    }
+
+    .values__wrapper {
+        gap: 4rem 3rem;
+    }
+
+    .values__image {
+        display: none;
+    }
+
+    /* FAQs */
+    .faqs__wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+        width: 75%;
+    }
+
+    /* FOOTER */
+    .footer__container {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+}
+
+/******************** MEADIA QUERIES (small screens) ********************/
+@media screen and (max-width: 600px) {
+    /* MAIN HEADER */
+    .main__header {
+        margin-top: 0;
+        padding: 12rem 0 0;
+        height: 100vh;
+    }
+
+    .main__header-image, .main__header-circle {
+        display: none;
+    }
+
+    .main__header-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* PROGRAMS */
+    .trainer__wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .trainers__trainer {
+        width: 84%;
+        margin: 0 auto;
+    }
+    /* VALUES */
+    .values__wrapper {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .card.values__value {
+        width: 84%;
+        margin: 0 auto; /*margin-inline: auto; does the same work*/
+    }
+    
+    /* FAQS */
+    .faqs__wrapper {
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+
+    /* TESTIMONIAL */
+    .testimonials {
+        width: 100%;
+    }
+
+    .footer {
+        margin-top: 7rem;
+    }
+
+    .footer__container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .footer__container article {
+        align-items: center;
+    }
+
+    .footer__container article p {
+        text-align: center ;
+    }
+}
