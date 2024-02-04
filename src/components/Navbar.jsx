@@ -29,7 +29,15 @@ const Navbar = () => {
 				path: `/profile/${userSection?.userId}`,
 			},
 		];
-
+		if (userSection?.role === 'customer') {
+			return [
+				...restItems,
+				{
+					title: "Manage Coaches Registed",
+					path: "/manage-pt-registed",
+				},
+			];
+		}
 		if (userSection?.role === 'pt') {
 			return [
 				...restItems,
@@ -79,7 +87,7 @@ const Navbar = () => {
 					{userSection
 						? <DropdownCustom title={userSection.displayName} items={DropdownItems} onSelected={handleSelected} >
 							<Link to={'/'} onClick={() => sessionStorage.clear()} reloadDocument
-								className=" block text-center py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</Link>
+								className="text-white">Sign Out</Link>
 						</DropdownCustom>
 						:
 						<div className="w-full text-center">

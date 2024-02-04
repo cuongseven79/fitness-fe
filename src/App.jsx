@@ -36,11 +36,11 @@ const App = () => {
 				<Route path="gallery" element={<Gallery />} />
 				<Route path="plans" element={<Plans />} />
 				<Route path="trainers" element={<Trainers />} />
-				<Route path="manage-pt-registed" element={<h1>Manage pt registed on Customer ROLE</h1>} />
 				{userSection && <Route path="profile/:id" element={<Profile />} />}
 				{userSection?.role === 'admin' && <Route path="manage-customers" element={<Login />} />}
 				{userSection?.role === 'admin' && <Route path="manage-orders" element={<ManageOrders />} />}
-				{userSection?.role === 'pt' && <Route path="manage-customers-registed" element={<h1>Manage customer registed on PT ROLE</h1>} />}
+				{userSection?.role === 'pt' && <Route path="manage-customers-registed" element={<h1 className="text-[180px]">Manage customer registed on PT ROLE</h1>} />}
+				{userSection?.role === 'customer' && <Route path="manage-pt-registed" element={<h1 className="text-[180px]">Manage customer registed on Customer ROLE</h1>} />}
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
 				<Route path="*" element={<NotFound />} />

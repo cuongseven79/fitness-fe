@@ -27,8 +27,8 @@ const DropdownCustom = ({
 
             {/* <!-- Dropdown menu --> */}
             {isOpen && (
-                <div className={"absolute w-full bg-white divide-y  rounded-lg shadow  dark:bg-yellow-700 dark:divide-gray-600"}>
-                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+                <div className={"absolute w-full mt-1 bg-white divide-y  rounded-lg shadow  dark:bg-yellow-700 dark:divide-gray-600 overflow-hidden font-medium"}>
+                    <ul className=" text-sm text-gray-700 overflow-hidden ">
                         {items.map((item, index) => (
                             <li key={index} onClick={() => handleSelectedItem(item)} className="w-full text-center">
                                 <Link to={item.path} className="block px-2 py-3 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" reloadDocument>
@@ -37,7 +37,7 @@ const DropdownCustom = ({
                             </li>
                         ))}
                     </ul>
-                    <div className="py-2">
+                    <div className="block text-center text-sm text-gray-700 py-4 bg-red-400 hover:bg-red-500">
                         {children}
                     </div>
                 </div>
