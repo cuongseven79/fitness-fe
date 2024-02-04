@@ -71,7 +71,7 @@ const ManageOrders = () => {
 
   return (
     <section>
-      <span className='font'>Manage Orders</span>
+      <span className='manage_order_title'>Manage Orders</span>
       <div className="container">
         <div className="date-filter">
           <div className="margin-right-50">
