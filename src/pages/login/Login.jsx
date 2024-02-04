@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import loadingGIF from "../../images/loading.gif";
+
+
 
 function InputField({ id, type, placeholder, value, onChange }) {
     return (
@@ -25,6 +28,7 @@ function InputField({ id, type, placeholder, value, onChange }) {
 
 function Login() {
     const [messageRes, setMessageRes] = useState('')
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -44,33 +48,39 @@ function Login() {
     }
     async function handleSubmit(e) {
         e.preventDefault();
+        setLoading(true);
         const { message, statusCode } = await login(formData);
         if (statusCode === 200) {
             navigate('/')
         } else {
             setMessageRes(message)
         }
-        // const res = await resetPassword("trangiacuong216@gmail.com")
-        // console.log("res ==> ", res)
+        setLoading(false);
     }
 
     async function handleLoginGoogle(e) {
         e.preventDefault();
+        setLoading(true);
         const res = await signInWithGoogle();
         if (res) {
             navigate("/");
         }
+        setLoading(false);
     }
-
 
     return (
         <div className="mx-auto py-10 rounded-3xl bg-white mt-40 w-1/3">
             <form onSubmit={handleSubmit} className="mx-10 flex flex-col justify-center items-center">
                 <InputField id="email" type="email" placeholder="E-Mail Address" value={formData.email} onChange={handleFormChange} />
                 <InputField id="password" type="password" placeholder="Password" value={formData.password} onChange={handleFormChange} />
-                <span className="text-red-500">{messageRes}</span>
+
+                {loading
+                    ? <img className="w-20" src={loadingGIF} alt="Loading" />
+                    : <span className="text-red-500">{messageRes}</span>
+
+                }
                 <div className="mb-10">
-                    <button className="bg-blue-600 hover:bg-blue-500 text-white rounded-full h-12 w-full text-lg font-medium">Sign In</button>
+                    <button className={`${loading ?? "bg-gray-400"} flex justify-center w-full bg-blue-600 hover:bg-blue-500 hover:text-white cursor-pointer rounded-lg text-sm font-semibold text-white focus px-6 py-3 uppercase btn lg sm:text-sm sm:px-2 md:text-base md:px-4 `}>Sign In</button>
                     <div className="mt-4">
                         <GoogleButton className="googleBtn" type="light" label="Login with Google" onClick={handleLoginGoogle} />
                     </div>

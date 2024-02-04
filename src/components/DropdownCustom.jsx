@@ -37,7 +37,7 @@ const DropdownCustom = ({
                             </li>
                         ))}
                     </ul>
-                    <div className="block text-center text-sm text-gray-700 py-4 bg-red-400 hover:bg-red-500">
+                    <div className="text-center text-sm text-gray-700 py-4 bg-red-400 hover:bg-red-500">
                         {children}
                     </div>
                 </div>

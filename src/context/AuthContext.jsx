@@ -17,16 +17,16 @@ export function AuthProvider({ children }) {
 
 	async function signInWithGoogle() {
 		try {
-			const res = await signInWithPopup(auth, googleProvider);
-			const { displayName, email, phoneNumber, photoURL, uid } = res.user;
-			const userData = { displayName, email, phoneNumber, photoURL, role: 'customer' };
-
+			const resGoogle = await signInWithPopup(auth, googleProvider);
+			const { displayName, email, phoneNumber, photoURL, uid } = resGoogle.user;
+			const userData = { displayName, email, phoneNumber, photoURL };
 			const Users = doc(database, "Users", uid);
 			if (!(await getDoc(Users)).exists()) {
-				await setDoc(Users, userData);
+				await setDoc(Users, { ...userData, role: 'customer' });
 			}
-			setCurrentUser(userData);
-			sessionStorage.setItem('user', JSON.stringify({ userId: uid, displayName }));
+			const res = (await getDoc(Users)).data();
+			setCurrentUser(res);
+			sessionStorage.setItem('user', JSON.stringify({ userId: uid, displayName: res.displayName, role: res.role }));
 
 			onAuthStateChanged(auth, (user) => {
 				if (user) {
@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
 					console.log('User is not signed in');
 				}
 			});
-			return res.user;
+			return res;
 		} catch (error) {
 			console.error('An error occurred during sign in with Google:', error);
 		}
