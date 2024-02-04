@@ -4,8 +4,6 @@ import { auth, database, googleProvider } from "../config/firebase-config";
 import { onAuthStateChanged, sendPasswordResetEmail, signInWithPopup } from "firebase/auth";
 import { getDoc, setDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 
-
-
 const AuthContext = createContext();
 export function useAuth() {
 	return useContext(AuthContext);
