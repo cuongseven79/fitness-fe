@@ -41,8 +41,8 @@ const App = () => {
 				{userSection?.role === 'admin' && <Route path="manage-customers" element={< ManageOrders />} />}
 				{userSection?.role === 'admin' && <Route path="manage-users" element={< ManageUsers />} />}
 				{userSection?.role === 'admin' && <Route path="manage-orders" element={<ManageOrders />} />}
-				{userSection?.role === 'pt' && <Route path="manage-customers-registed" element={<h1 className="text-[180px]">Manage customer registed on PT ROLE</h1>} />}
-				{userSection?.role === 'customer' && <Route path="manage-pt-registed" element={<h1 className="text-[180px]">Manage customer registed on Customer ROLE</h1>} />}
+				{userSection?.role === 'pt' && <Route path="manage-customers" element={<h1 className="text-[180px]">Manage customer registed on PT ROLE</h1>} />}
+				{userSection?.role === 'customer' && <Route path="manage-pts" element={<h1 className="text-[180px]">Manage customer registed on Customer ROLE</h1>} />}
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
 				<Route path="*" element={<NotFound />} />

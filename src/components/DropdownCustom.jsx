@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom';
 
 const DropdownCustom = ({
@@ -10,15 +10,20 @@ const DropdownCustom = ({
 }) => {
 
     const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
     function handleSelectedItem(item) {
         setIsOpen(false);
         onSelected(item);
     }
 
     return (
-        <div className="relative">
+        <div className="relative" ref={ref}>
             {/* <!-- Dropdown toggle button --> */}
-            <button onClick={() => setIsOpen(prev => !prev)} className={`${className} bg-blue-700 text-white font-medium rounded-lg text-sm px-8 py-2.5 text-center inline-flex items-center`} type="button">
+            <button
+                onFocus={() => setTimeout(() => { setIsOpen(true) }, 150)}
+                onBlur={() => setTimeout(() => { setIsOpen(false) }, 150)}
+                className={`${className} bg-blue-700 text-white font-medium rounded-lg text-sm px-8 py-2.5 text-center inline-flex items-center`} type="button">
                 <span>{title}</span>
                 <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import ImageUploader from "../../components/ImageUploadCustom";
 import DefaultCertImg from "../../images/cert-frame.png";
 import UserDefaultImage from "../../images/user_profile.png";
-import { getProfile } from "../../api/profileService";
+import { getProfile, updateProfile } from "../../api/profileService";
 import { useParams } from "react-router-dom";
-import { adminCustomerRole } from "../../utils/checkRole";
+import { adminCustomerRole, ptRole } from "../../utils/checkRole";
 import loadingGIF from "../../images/loading.gif"
+import { message } from 'antd';
 
 const FormField = ({ id, label, placeholder, value, onChange }) => (
     <li className="py-3 flex justify-between items-center gap-10">
@@ -17,27 +18,52 @@ const FormField = ({ id, label, placeholder, value, onChange }) => (
 const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [formState, setFormState] = useState({
-        displayName: '',
-        gender: '',
-        age: '',
-        experience: '',
-        phoneNumber: '',
-        address: '',
-        price: ''
-    });
+    const [messageApi, contextHolder] = message.useMessage();
+    const [formData, setFormData] = useState({});
     const { id } = useParams() // {id} get from Router path <App/> in App.js
+
+
+    const successMessage = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Update profile successfully!',
+            duration: 2,
+            style: { position: "relative", top: 70 }
+        });
+    };
+    const errorMessage = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'Nothing updated!',
+            duration: 2,
+            style: { position: "relative", top: 70 }
+        });
+    };
+
     function handleChange(e) {
-        setFormState({
-            ...formState,
+        setFormData({
+            ...formData,
             [e.target.id]: e.target.value
         });
     }
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        console.log(formState);
-        
+        setLoading(true);
+        try {
+            const res = await updateProfile(formData, id);
+            if (res.statusCode === 200) {
+                setProfile(res.user);
+                setFormData(null)
+            }
+            successMessage();
+        } catch (error) {
+            errorMessage();
+            console.error('An error occurred during profile update:', error);
+        } finally {
+            setLoading(false);
+        }
+
     }
 
     const fetchProfile = async () => {
@@ -48,6 +74,7 @@ const Profile = () => {
             }
         } catch (error) {
             console.log(error);
+            alert("Sorry, system is maintaining, please come back later!");
         }
     }
 
@@ -55,35 +82,39 @@ const Profile = () => {
         document.title = `Profile`;
         fetchProfile();
     }, []);
+
     if (!profile) {
         return <div className="w-40 mt-44 mx-auto" >
             <img src={loadingGIF} alt="Loading" />
         </div>
     }
+
     return (
         <section className="p-10 rounded-2xl bg-white container text-black">
             <form onSubmit={(e) => handleSubmit(e)}>
                 <h1 className="text-2xl py-10 text-black m-auto">MY PROFILE</h1>
                 <div className="flex justify-around">
                     <div>
-                        <FormField id="displayName" label="Display Name:" placeholder={profile.displayName} value={formState.displayName} onChange={handleChange} />
-                        <FormField id="gender" label="Gender:" placeholder="Gender" value={formState.gender} onChange={handleChange} />
-                        <FormField id="age" label="Age" placeholder="Age" value={formState.age} onChange={handleChange} />
-                        <FormField id="experience" label="Year of Experiences" placeholder="Year of Experiences" value={formState.experience} onChange={handleChange} />
-                        <FormField id="phoneNumber" label="Phone Number" placeholder="Phone Number" value={formState.phoneNumber} onChange={handleChange} />
-                        <FormField id="address" label="Address" placeholder="Address" value={formState.address} onChange={handleChange} />
-                        <FormField id="price" label="Price" placeholder="Price" value={formState.price} onChange={handleChange} />
+                        <FormField id="displayName" label="Display Name:" placeholder={profile.displayName} value={formData.displayName} onChange={handleChange} />
+                        <FormField id="gender" label="Gender:" placeholder={profile.gender} value={formData.gender} onChange={handleChange} />
+                        <FormField id="age" label="Age" placeholder={profile.age} value={formData.age} onChange={handleChange} />
+                        {ptRole && <FormField id="experience" label="Year of Experiences" placeholder={profile.experience} value={formData.experience} onChange={handleChange} />}
+                        <FormField id="phoneNumber" label="Phone Number" placeholder={profile.phoneNumber} value={formData.phoneNumber} onChange={handleChange} />
+                        <FormField id="address" label="Address" placeholder={profile.address} value={formData.address} onChange={handleChange} />
+                        {ptRole && <FormField id="price" label="Price" placeholder={profile.price} value={formData.price} onChange={handleChange} />}
                     </div>
                     <ImageUploader defaultImage={`${profile.photoURL ? profile.photoURL : UserDefaultImage}`} typeImage={"photo"} />
                 </div>
-                <div className="w-1/2 flex justify-evenly m-auto">
+                {contextHolder}
+                <div className=" mt-10  flex justify-center">
                     <button type="submit" className="rounded-lg px-12 py-4 bg-blue-400 hover:bg-blue-500 text-white">
                         {loading ?
-                            <img className="w-20 px-6 " src={loadingGIF} alt="Loading" />
-                            : 'Save'
+                            <div className="w-20 px-6">
+                                <img className=" " src={loadingGIF} alt="Loading" />
+                            </div>
+                            : <span className="w-20 px-6">Save</span>
                         }
                     </button>
-                    <button type="reset" className="rounded-lg px-12 py-4 bg-gray-400 hover:bg-gray-500 text-white">Cancel</button>
                 </div>
             </form>
             <div className={`${adminCustomerRole ? 'hidden' : ""}`}>
@@ -110,3 +141,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+

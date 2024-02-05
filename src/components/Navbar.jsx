@@ -33,8 +33,8 @@ const Navbar = () => {
 			return [
 				...restItems,
 				{
-					title: "Manage Coaches Registed",
-					path: "/manage-pt-registed",
+					title: "Manage Coaches",
+					path: "/manage-pts",
 				},
 			];
 		}
