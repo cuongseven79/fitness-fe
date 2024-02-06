@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+/* Import UI Library  */
 import { Button, Dropdown, Menu, Row, Pagination } from "antd";
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
+/* Import Components */
 import Card from "../../components/Card";
 import Header from "../../components/Header";
 import SectionHead from "../../components/SectionHead";
 import ModalCustom from "../../components/ModalCustom";
 
+/* Import Icons */
 import { AiFillStar } from "react-icons/ai";
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { FaCrown } from "react-icons/fa";
 
+/* Import Images */
 import HeaderImage from "../../images/header_bg_5.jpg";
 import loadingGIF from "../../images/loading.gif";
 
+/* Import Service */
 import { getAllTrainers } from "../../api/trainerService";
 
 const paginate = (items, currentPage, pageSize) => {
@@ -63,7 +67,6 @@ const TrainerModal = ({ open, setOpen, trainer }) => {
 		</ModalCustom>
 	);
 };
-
 const Trainers = () => {
 	const [open, setOpen] = useState(false);
 	const [users, setUsers] = useState([]);
@@ -72,8 +75,8 @@ const Trainers = () => {
 	const [filter, setFilter] = useState("all");
 	const [selectedMenuItem, setSelectedMenuItem] = useState(null);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [pageSize, setPageSize] = useState(6);
 	const [loading, setLoading] = useState(false);
+	const pageSize = 6;
 
 	useEffect(() => {
 		fetchData();
@@ -193,6 +196,7 @@ const Trainers = () => {
 
 	const paginatedList = paginate(sortedList, currentPage, pageSize);
 
+	console.log("trainerInfo ==> ", trainerInfo)
 	return (
 		<>
 			<Header image={HeaderImage} title="Our Trainers">
@@ -235,7 +239,7 @@ const Trainers = () => {
 							<div className="container grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-16">
 								{paginatedList && paginatedList.length > 0 ? (
 									paginatedList.map((trainer) => (
-										<Card className="" key={trainer.id} >
+										<Card key={trainer.id} >
 											<div
 												onClick={() => {
 													setOpen(true);
@@ -247,16 +251,16 @@ const Trainers = () => {
 												</div>
 												<div className="opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full "></div>
 												<div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 ">
-													<h1 className="text-lg">View information</h1>
+													<h1 className="text-lg font-sans font-thin">View information</h1>
 												</div>
 											</div>
 											<h3 className="text-[20px] text-[#EAB308] font-semibold">
 												{trainer.displayName}
 											</h3>
 											<p>{trainer.field}</p>
-											<div className="my-3 flex justify-evenly mx-auto items-center">
-												<h1>{`$ ${trainer.price}`}</h1>
-												<select className="text-black px-1 rounded-md">
+											<div className="my-3 flex justify-center items-center space-x-5">
+												<h1 className="font-semibold text-2xl">{`$ ${trainer.price}`}</h1>
+												<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent">
 													<option value="">1 month</option>
 													<option value="">2 month</option>
 													<option value="">3 month</option>
@@ -268,9 +272,7 @@ const Trainers = () => {
 														<AiFillStar color="yellow" />
 													)}
 											</div>
-											<Link to={"plans"} className="btn sm">
-												Booking
-											</Link>
+											<button onClick={() => setTrainerInfo(trainer)} className="btn md">Booking</button>
 										</Card>
 									))
 								) : (
