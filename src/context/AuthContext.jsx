@@ -10,6 +10,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+	const [currentUser, setCurrentUser] = useState(null);
 
 	async function signInWithGoogle() {
 		try {
@@ -21,6 +22,7 @@ export function AuthProvider({ children }) {
 				await setDoc(Users, { ...userData, role: 'customer' });
 			}
 			const res = (await getDoc(Users)).data();
+			setCurrentUser(res);
 			sessionStorage.setItem('user', JSON.stringify({ userId: uid, displayName: res.displayName, role: res.role }));
 
 			onAuthStateChanged(auth, (user) => {
@@ -40,6 +42,7 @@ export function AuthProvider({ children }) {
 			const { message, statusCode, userData } = await verifyLogin(formData);
 			if (statusCode === 200) {
 				const { password, ...user } = userData;
+				setCurrentUser(user);
 				sessionStorage.setItem('user', JSON.stringify({ userId: user.userId, displayName: user.displayName, role: user.role }));
 				return { message: "Register successfully", statusCode: statusCode };
 			}
@@ -106,7 +109,9 @@ export function AuthProvider({ children }) {
 		signInWithGoogle,
 		signUp,
 		getUsers,
-		resetPassword
+		resetPassword,
+		currentUser,
+		setCurrentUser,
 	};
 
 	return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

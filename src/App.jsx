@@ -18,8 +18,13 @@ import SignUp from "./pages/signup/SignUp";
 import { userSection } from "./utils/checkRole";
 import ManageOrders from "./pages/ordermanagement/OrderManage";
 import ManageUsers from "./pages/manage-user/ManageUser";
+import { useAuth } from "./context/AuthContext";
 
 const App = () => {
+	const { setCurrentUser } = useAuth()
+	useEffect(() => {
+		setCurrentUser(userSection)
+	}, []);
 	return (
 		<BrowserRouter>
 			<Navbar />
