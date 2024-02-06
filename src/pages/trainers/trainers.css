@@ -40,7 +40,12 @@
 .trainer:hover a {
     background: var(--color-gray-500);
 }
-
+.selected {
+    background: 
+    #0080ff;
+    color: white;
+  }
+  
  
 /* MEDIA QUERIES (medium sxreen) */
 @media screen and (max-width: 1024px){
@@ -60,3 +65,10 @@
         margin-inline: auto;
     }
 }
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+    margin: 20px 10px;
+  }
+  

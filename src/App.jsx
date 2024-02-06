@@ -15,18 +15,11 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 
 // check Role
-import { useAuth } from "./context/AuthContext";
 import { userSection } from "./utils/checkRole";
 import ManageOrders from "./pages/ordermanagement/OrderManage";
 import ManageUsers from "./pages/manage-user/ManageUser";
 
 const App = () => {
-
-	const { setCurrentUser } = useAuth()
-	useEffect(() => {
-		setCurrentUser(userSection)
-	}, []);
-
 	return (
 		<BrowserRouter>
 			<Navbar />

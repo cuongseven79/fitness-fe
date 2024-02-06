@@ -20,6 +20,11 @@ export const updateProfile = async (formData,id) => {
   const response = await axios.put(API_URL + "/profile/update", {formData:formData,id:id})
   return response.data;
 }
+export const updateSwitch = async(id,trainerStatus) => {
+    const response = await axios.put(API_URL + '/profile/switch', {id:id, trainerStatus:trainerStatus});
+    return response.data;
+}
+
 export const deleteImage = async (fileName, userId, typeImage) => {
   const response = await axios.delete(API_URL + "/profile/delete", {
     data: {

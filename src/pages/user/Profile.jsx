@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import ImageUploader from "../../components/ImageUploadCustom";
 import DefaultCertImg from "../../images/cert-frame.png";
 import UserDefaultImage from "../../images/user_profile.png";
-import { getProfile, updateProfile } from "../../api/profileService";
+import { getProfile, updateProfile, updateSwitch } from "../../api/profileService";
 import { useParams } from "react-router-dom";
 import { adminCustomerRole, ptRole } from "../../utils/checkRole";
 import loadingGIF from "../../images/loading.gif"
 import { message } from 'antd';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { Switch, Space } from 'antd';
 
 const FormField = ({ id, label, placeholder, value, onChange }) => (
     <li className="py-3 flex justify-between items-center gap-10">
@@ -18,6 +20,7 @@ const FormField = ({ id, label, placeholder, value, onChange }) => (
 const Profile = () => {
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [checked, setChecked] = useState(true);
     const [messageApi, contextHolder] = message.useMessage();
     const [formData, setFormData] = useState({});
     const { id } = useParams() // {id} get from Router path <App/> in App.js
@@ -63,7 +66,18 @@ const Profile = () => {
         } finally {
             setLoading(false);
         }
+    }
 
+    const handleSwitching = async (newStatus) => {
+        try {
+            setChecked(newStatus);
+            const { statusCode, trainerStatus } = await updateSwitch(id, newStatus);
+            if (statusCode === 200) {
+                setChecked(trainerStatus)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const fetchProfile = async () => {
@@ -71,10 +85,11 @@ const Profile = () => {
             const { statusCode, user } = await getProfile(id);
             if (user && statusCode === 200) {
                 setProfile(user);
+                setChecked(user?.trainerStatus)
             }
         } catch (error) {
             console.log(error);
-            alert("Sorry, system is maintaining, please come back later!");
+            alert("Sorry, System is maintaining, please come back later!");
         }
     }
 
@@ -88,11 +103,14 @@ const Profile = () => {
             <img src={loadingGIF} alt="Loading" />
         </div>
     }
-
+    console.log(checked)
     return (
         <section className="p-10 rounded-2xl bg-white container text-black">
             <form onSubmit={(e) => handleSubmit(e)}>
-                <h1 className="text-2xl py-10 text-black m-auto">MY PROFILE</h1>
+                <div className="flex justify-between py-10">
+                    <h1 className="text-2xl  uppercase font-semibold text-[#F1B143]">My profile</h1>
+                    <Switch checkedChildren="Available" unCheckedChildren="Busy" value={checked} className="bg-gray-500" onClick={() => handleSwitching(!checked)} />
+                </div>
                 <div className="flex justify-around">
                     <div>
                         <FormField id="displayName" label="Display Name:" placeholder={profile.displayName} value={formData.displayName} onChange={handleChange} />
