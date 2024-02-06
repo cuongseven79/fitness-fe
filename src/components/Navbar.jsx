@@ -21,24 +21,24 @@ const NavItem = ({ name, path, handleNavToggle }) => (
 
 const Navbar = () => {
 	const [isNavShowing, setIsNavShowing] = useState(false);
-	const userSection = JSON.parse(sessionStorage.getItem('user'));
+	const userSession = JSON.parse(sessionStorage.getItem('user'));
 	const getDropDownItems = () => {
 		const restItems = [
 			{
 				title: "My profile",
-				path: `/profile/${userSection?.userId}`,
+				path: `/profile/${userSession?.userId}`,
 			},
 		];
-		if (userSection?.role === 'customer') {
+		if (userSession?.role === 'customer') {
 			return [
 				...restItems,
 				{
 					title: "Manage Coaches",
-					path: "/manage-pts",
+					path: "/manage-coaches",
 				},
 			];
 		}
-		if (userSection?.role === 'pt') {
+		if (userSession?.role === 'pt') {
 			return [
 				...restItems,
 				{
@@ -48,7 +48,7 @@ const Navbar = () => {
 			];
 		}
 
-		if (userSection?.role === 'admin') {
+		if (userSession?.role === 'admin') {
 			return [
 				...restItems,
 				{
@@ -84,8 +84,8 @@ const Navbar = () => {
 					))}
 				</ul>
 				<div>
-					{userSection
-						? <DropdownCustom title={userSection.displayName} items={DropdownItems} onSelected={handleSelected} >
+					{userSession
+						? <DropdownCustom title={userSession.displayName} items={DropdownItems} onSelected={handleSelected} >
 							<Link to={'/'} onClick={() => sessionStorage.clear()} reloadDocument
 								className="text-white">Sign Out</Link>
 						</DropdownCustom>

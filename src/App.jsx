@@ -15,15 +15,17 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 
 // check Role
-import { userSection } from "./utils/checkRole";
+import { userSession } from "./utils/checkRole";
 import ManageOrders from "./pages/ordermanagement/OrderManage";
 import ManageUsers from "./pages/manage-user/ManageUser";
 import { useAuth } from "./context/AuthContext";
+import ManageCoaches from "./pages/manage-coaches/ManageCoach";
+import ManageCustomer from "./pages/manage-customers/ManageCustomer";
 
 const App = () => {
 	const { setCurrentUser } = useAuth()
 	useEffect(() => {
-		setCurrentUser(userSection)
+		setCurrentUser(userSession)
 	}, []);
 	return (
 		<BrowserRouter>
@@ -35,12 +37,12 @@ const App = () => {
 				<Route path="gallery" element={<Gallery />} />
 				<Route path="plans" element={<Plans />} />
 				<Route path="trainers" element={<Trainers />} />
-				{userSection && <Route path="profile/:id" element={<Profile />} />}
-				{userSection?.role === 'admin' && <Route path="manage-customers" element={< ManageOrders />} />}
-				{userSection?.role === 'admin' && <Route path="manage-users" element={< ManageUsers />} />}
-				{userSection?.role === 'admin' && <Route path="manage-orders" element={<ManageOrders />} />}
-				{userSection?.role === 'pt' && <Route path="manage-customers" element={<h1 className="text-[180px]">Manage customer registed on PT ROLE</h1>} />}
-				{userSection?.role === 'customer' && <Route path="manage-pts" element={<h1 className="text-[180px]">Manage customer registed on Customer ROLE</h1>} />}
+				{userSession && <Route path="profile/:id" element={<Profile />} />}
+				{userSession?.role === 'admin' && <Route path="manage-customers" element={< ManageOrders />} />}
+				{userSession?.role === 'admin' && <Route path="manage-users" element={< ManageUsers />} />}
+				{userSession?.role === 'admin' && <Route path="manage-orders" element={<ManageOrders />} />}
+				{userSession?.role === 'pt' && <Route path="manage-customers" element={<ManageCustomer />} />}
+				{userSession?.role === 'customer' && <Route path="manage-coaches" element={<ManageCoaches />} />}
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
 				<Route path="*" element={<NotFound />} />

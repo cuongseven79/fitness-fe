@@ -109,7 +109,7 @@ const Profile = () => {
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="flex justify-between py-10">
                     <h1 className="text-2xl  uppercase font-semibold text-[#F1B143]">My profile</h1>
-                    <Switch checkedChildren="Available" unCheckedChildren="Busy" value={checked} className="bg-gray-500" onClick={() => handleSwitching(!checked)} />
+                    {ptRole && <Switch checkedChildren="Available" unCheckedChildren="Busy" value={checked} className="bg-gray-500" onClick={() => handleSwitching(!checked)} />}
                 </div>
                 <div className="flex justify-around">
                     <div>
