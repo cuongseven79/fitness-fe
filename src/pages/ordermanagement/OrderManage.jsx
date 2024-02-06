@@ -124,11 +124,11 @@ const ManageOrders = () => {
               </thead>
               <tbody>
                 {currentOrders.map((order, index) => (
-                  <tr key={order.orderId}>
+                  <tr key={order.order_id}>
                     <td>{startIndex + index + 1}</td>
                     <td>{order.displayName}</td>
                     <td>{formatDate(order.date._seconds)}</td>
-                    <td>{order.orderId}</td>
+                    <td>{order.order_id}</td>
                     <td>{order.service_type}</td>
                     <td>{formatDate(order.start_time._seconds)}</td>
                     <td>{formatDate(order.end_time._seconds)}</td>
