@@ -1,0 +1,9 @@
+.notify__container {
+    text-align: center;
+    padding-top: 5rem;
+}
+
+.notify__container .btn {
+    margin-top: 2rem;
+    display: block;
+}
