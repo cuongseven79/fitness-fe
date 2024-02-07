@@ -196,7 +196,6 @@ const Trainers = () => {
 
 	const paginatedList = paginate(sortedList, currentPage, pageSize);
 
-	console.log("trainerInfo ==> ", trainerInfo)
 	return (
 		<>
 			<Header image={HeaderImage} title="Our Trainers">
@@ -210,19 +209,19 @@ const Trainers = () => {
 							<Button type="primary" style={{ background: filter === "all" ? "#0080ff" : "#4b5c988f", }} onClick={() => getAll()}>
 								<span>All</span>
 							</Button>
-							<Dropdown overlay={ratingMenu} placement="bottomLeft">
+							<Dropdown menu={ratingMenu} placement="bottomLeft">
 								<Button type="primary" style={{ background: filter === "rating" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
 									<span>Rating</span>
 									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
 								</Button>
 							</Dropdown>
-							<Dropdown overlay={fieldMenu} placement="bottomLeft">
+							<Dropdown menu={fieldMenu} placement="bottomLeft">
 								<Button type="primary" style={{ background: filter === "field" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
 									<span>Field</span>
 									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
 								</Button>
 							</Dropdown>
-							<Dropdown overlay={priceMenu} placement="bottomLeft">
+							<Dropdown menu={priceMenu} placement="bottomLeft">
 								<Button type="primary" style={{ background: filter === "price" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
 									<span>Price</span>
 									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>

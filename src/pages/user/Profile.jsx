@@ -7,8 +7,7 @@ import { useParams } from "react-router-dom";
 import { adminCustomerRole, ptRole } from "../../utils/checkRole";
 import loadingGIF from "../../images/loading.gif"
 import { message } from 'antd';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Switch, Space } from 'antd';
+import { Switch} from 'antd';
 
 const FormField = ({ id, label, placeholder, value, onChange }) => (
     <li className="py-3 flex justify-between items-center gap-10">
@@ -24,7 +23,6 @@ const Profile = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const [formData, setFormData] = useState({});
     const { id } = useParams() // {id} get from Router path <App/> in App.js
-
 
     const successMessage = () => {
         messageApi.open({
@@ -54,11 +52,7 @@ const Profile = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await updateProfile(formData, id);
-            if (res.statusCode === 200) {
-                setProfile(res.user);
-                setFormData(null)
-            }
+            const { } = await updateProfile(formData, id);
             successMessage();
         } catch (error) {
             errorMessage();
@@ -103,13 +97,17 @@ const Profile = () => {
             <img src={loadingGIF} alt="Loading" />
         </div>
     }
-    console.log(checked)
     return (
         <section className="p-10 rounded-2xl bg-white container text-black">
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="flex justify-between py-10">
                     <h1 className="text-2xl  uppercase font-semibold text-[#F1B143]">My profile</h1>
-                    {ptRole && <Switch checkedChildren="Available" unCheckedChildren="Busy" value={checked} className="bg-gray-500" onClick={() => handleSwitching(!checked)} />}
+                    {ptRole &&
+                        <div>
+                            <span className="text-sm font-serif">Coach status: </span>
+                            <Switch checkedChildren="Available" unCheckedChildren="Busy" value={checked} className="bg-gray-500" onClick={() => handleSwitching(!checked)} />
+                        </div>
+                    }
                 </div>
                 <div className="flex justify-around">
                     <div>

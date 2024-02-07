@@ -79,14 +79,8 @@ function SignUp() {
 		if (res) {
 			navigate("/");
 		}
-		console.log("res==>", res)
 	}
-	// async function handleLoginFacebook(e) {
-	// 	e.preventDefault();
-	// 	await signInWithFacebook().catch((err) => console.log(JSON.stringify(err)));
-	// }
 
-	console.log(formData)
 	return (
 		<div className="mx-auto py-10 rounded-3xl bg-white mt-36 w-1/3">
 			<form onSubmit={handleSubmit} className="mx-10 flex flex-col justify-center items-center">

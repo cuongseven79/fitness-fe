@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import './manage-coach.css';
-import { getMyCoaches } from "../../api/trainerService";
+import { getMyCoaches } from "../../api/coachService";
 
 
 const ManageCoaches = () => {

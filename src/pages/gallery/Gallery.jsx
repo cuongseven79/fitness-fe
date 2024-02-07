@@ -12,8 +12,6 @@ function Gallery() {
 	for (let i = 1; i <= galleryLength; i++) {
 		images.push(require(`../../images/gallery${i}.jpg`));
 	}
-	// console.log(images); //Array of image/
-
 	return (
 		<>
 			<Header title="Our Gallery" image={HeaderImage}>
