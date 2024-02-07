@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "antd";
 import './manage-coach.css';
 import { getMyCoaches } from "../../api/coachService";
@@ -18,7 +18,8 @@ const ManageCoaches = () => {
         { title: "End-time", dataIndex: "endTime" },
     ];
 
-    const fetchUsers = async () => {
+
+    const fetchUsers = useCallback(async () => {
         try {
             setLoading(true);
             const { statusCode, coachesData } = await getMyCoaches(userSession.userId);
@@ -29,11 +30,11 @@ const ManageCoaches = () => {
         } catch (error) {
             console.error("Error fetching users:", error);
         }
-    };
+    }, [userSession.userId])
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [fetchUsers]);
 
     return (
         <section className="container">

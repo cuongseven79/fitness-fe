@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "antd";
 import './manage-customer.css';
 import { getMyCustomers } from "../../api/customerService";
@@ -16,7 +16,7 @@ const ManageCustomers = () => {
     { title: "End-time", dataIndex: "endTime" },
   ];
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setLoading(true);
       const { statusCode, customersData } = await getMyCustomers(userSession.userId);
@@ -27,11 +27,11 @@ const ManageCustomers = () => {
     } catch (error) {
       console.error("Error fetching users:", error);
     }
-  };
+  }, [userSession.userId])
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   return (
     <section className="container">

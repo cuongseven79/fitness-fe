@@ -209,19 +209,19 @@ const Trainers = () => {
 							<Button type="primary" style={{ background: filter === "all" ? "#0080ff" : "#4b5c988f", }} onClick={() => getAll()}>
 								<span>All</span>
 							</Button>
-							<Dropdown menu={ratingMenu} placement="bottomLeft">
+							<Dropdown overlay={ratingMenu} trigger={['click']} placement="bottomLeft">
 								<Button type="primary" style={{ background: filter === "rating" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
 									<span>Rating</span>
 									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
 								</Button>
 							</Dropdown>
-							<Dropdown menu={fieldMenu} placement="bottomLeft">
+							<Dropdown overlay={fieldMenu} trigger={['click']} placement="bottomLeft">
 								<Button type="primary" style={{ background: filter === "field" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
 									<span>Field</span>
 									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
 								</Button>
 							</Dropdown>
-							<Dropdown menu={priceMenu} placement="bottomLeft">
+							<Dropdown overlay={priceMenu} trigger={['click']} placement="bottomLeft">
 								<Button type="primary" style={{ background: filter === "price" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
 									<span>Price</span>
 									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>

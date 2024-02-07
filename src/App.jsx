@@ -26,7 +26,7 @@ const App = () => {
 	const { setCurrentUser } = useAuth()
 	useEffect(() => {
 		setCurrentUser(userSession)
-	}, []);
+	}, [setCurrentUser]);
 	return (
 		<BrowserRouter>
 			<Navbar />
