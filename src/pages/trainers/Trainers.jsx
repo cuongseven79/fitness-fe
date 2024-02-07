@@ -257,7 +257,7 @@ const Trainers = () => {
 												{trainer.displayName}
 											</h3>
 											<p>{trainer.field}</p>
-											<div className="my-3 flex justify-center items-center space-x-5">
+											<div className="my-3 flex justify-center items-center text-[18px] space-x-12">
 												<h1 className="font-semibold text-2xl">{`$ ${trainer.price}`}</h1>
 												<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent">
 													<option value="">1 month</option>
@@ -267,9 +267,7 @@ const Trainers = () => {
 											</div>
 											<div className="flex justify-center mb-5">
 												{trainer.rating > 0 &&
-													Array(Math.round(trainer.rating)).fill(
-														<AiFillStar color="yellow" />
-													)}
+													Array(Math.round(trainer.rating)).fill(<AiFillStar color="yellow" />)}
 											</div>
 											<button onClick={() => setTrainerInfo(trainer)} className="btn md">Booking</button>
 										</Card>

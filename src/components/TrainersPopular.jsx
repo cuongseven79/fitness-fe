@@ -89,8 +89,8 @@ const TrainersPopular = () => {
 									<h3 className="text-[20px] text-[#EAB308] font-semibold">{trainer.displayName}</h3>
 									<p>{trainer.field}</p>
 									<div className="my-3 flex justify-center items-center text-[18px] space-x-12">
-										<h1 className="">{`$ ${trainer.price}`}</h1>
-										<select name="" id="" className="text-black rounded-md px-5 py-2 font-sans">
+										<h1 className="font-semibold text-2xl">{`$ ${trainer.price}`}</h1>
+										<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent">
 											<option value="">1 month</option>
 											<option value="">2 month</option>
 											<option value="">3 month</option>
