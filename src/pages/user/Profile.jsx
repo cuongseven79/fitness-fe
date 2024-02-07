@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ImageUploader from "../../components/ImageUploadCustom";
-import DefaultCertImg from "../../images/cert-frame.png";
-import UserDefaultImage from "../../images/user_profile.png";
+import DefaultCertImg from "../../assets/images/cert-frame.png";
+import UserDefaultImage from "../../assets/images/user_profile.png";
 import { getProfile, updateProfile, updateSwitch } from "../../api/profileService";
 import { useParams } from "react-router-dom";
 import { adminCustomerRole, ptRole } from "../../utils/checkRole";
-import loadingGIF from "../../images/loading.gif"
+import loadingGIF from "../../assets/images/loading.gif"
 import { message } from 'antd';
-import { Switch} from 'antd';
+import { Switch } from 'antd';
 
 const FormField = ({ id, label, placeholder, value, onChange }) => (
     <li className="py-3 flex justify-between items-center gap-10">
@@ -52,7 +52,7 @@ const Profile = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const { } = await updateProfile(formData, id);
+            await updateProfile(formData, id);
             successMessage();
         } catch (error) {
             errorMessage();
@@ -61,7 +61,7 @@ const Profile = () => {
             setLoading(false);
         }
     }
-
+    
     const handleSwitching = async (newStatus) => {
         try {
             setChecked(newStatus);
@@ -74,7 +74,7 @@ const Profile = () => {
         }
     }
 
-    const fetchProfile = async () => {
+    const fetchProfile = useCallback(async () => {
         try {
             const { statusCode, user } = await getProfile(id);
             if (user && statusCode === 200) {
@@ -85,12 +85,12 @@ const Profile = () => {
             console.log(error);
             alert("Sorry, System is maintaining, please come back later!");
         }
-    }
+    }, [id]); // id is a dependency here
 
     useEffect(() => {
         document.title = `Profile`;
         fetchProfile();
-    }, []);
+    }, [fetchProfile]);
 
     if (!profile) {
         return <div className="w-40 mt-44 mx-auto" >

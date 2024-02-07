@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SectionHead from "./SectionHead";
 import { ImQuotesLeft } from "react-icons/im";
-import avatar from "../images/avatar1.jpg";
+import avatar from "../assets/images/avatar1.jpg";
 import Card from "./Card";
 import { getDataDashboard } from "../api/homeService";
-import loadingGIF from "../images/loading.gif";
+import loadingGIF from "../assets/images/loading.gif";
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 
 const TestimonialCard = ({ feedback }) => (

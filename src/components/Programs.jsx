@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "../images/values.jpg";
 import SectionHead from "./SectionHead";
 import { GiCutDiamond } from "react-icons/gi";
 import { programs } from "../data";

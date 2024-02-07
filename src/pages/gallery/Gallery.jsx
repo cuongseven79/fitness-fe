@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./gallery.css";
-import HeaderImage from "../../images/header_bg_3.jpg";
+import HeaderImage from "../../assets/images/header_bg_3.jpg";
 import Header from "../../components/Header";
 
 function Gallery() {
@@ -10,7 +10,7 @@ function Gallery() {
 	const galleryLength = 15;
 	const images = [];
 	for (let i = 1; i <= galleryLength; i++) {
-		images.push(require(`../../images/gallery${i}.jpg`));
+		images.push(require(`../../assets/images/gallery${i}.jpg`));
 	}
 	return (
 		<>

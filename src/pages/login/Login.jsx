@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import loadingGIF from "../../images/loading.gif";
-
-
+import loadingGIF from "../../assets/images/loading.gif";
 
 function InputField({ id, type, placeholder, value, onChange }) {
     return (
@@ -25,7 +23,6 @@ function InputField({ id, type, placeholder, value, onChange }) {
         </div>
     );
 }
-
 function Login() {
     const [messageRes, setMessageRes] = useState('')
     const [loading, setLoading] = useState(false)
@@ -38,7 +35,7 @@ function Login() {
         document.title = `Log In`;
     }, []);
 
-    const { signInWithGoogle, login, resetPassword } = useAuth();
+    const { signInWithGoogle, login } = useAuth();
     const navigate = useNavigate();
     function handleFormChange(e) {
         setFormData({
@@ -77,7 +74,6 @@ function Login() {
                 {loading
                     ? <img className="w-20" src={loadingGIF} alt="Loading" />
                     : <span className="text-red-500">{messageRes}</span>
-
                 }
                 <div className="mb-10">
                     <button className={`${loading ?? "bg-gray-400"} flex justify-center w-full bg-blue-600 hover:bg-blue-500 hover:text-white cursor-pointer rounded-lg text-sm font-semibold text-white focus px-6 py-3 uppercase btn lg sm:text-sm sm:px-2 md:text-base md:px-4 `}>Sign In</button>

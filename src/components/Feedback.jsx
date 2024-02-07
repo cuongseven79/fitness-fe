@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { postDataDashboard } from "../api/homeService";
-import loadingGIF from "../images/loading.gif";
+import loadingGIF from "../assets/images/loading.gif";
 
 const Feedback = () => {
     const [loading, setLoading] = useState(false);

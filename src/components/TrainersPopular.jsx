@@ -5,8 +5,8 @@ import Card from "./Card";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import ModalCustom from '../components/ModalCustom';
-import { getDataDashboard, getTrainersPopular } from "../api/homeService";
-import loadingGIF from "../images/loading.gif";
+import { getDataDashboard } from "../api/homeService";
+import loadingGIF from "../assets/images/loading.gif";
 
 const TrainerInfoItem = ({ label, value }) => (
 	value && (

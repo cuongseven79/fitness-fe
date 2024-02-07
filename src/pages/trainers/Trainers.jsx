@@ -14,8 +14,8 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { FaCrown } from "react-icons/fa";
 
 /* Import Images */
-import HeaderImage from "../../images/header_bg_5.jpg";
-import loadingGIF from "../../images/loading.gif";
+import HeaderImage from "../../assets/images/header_bg_5.jpg";
+import loadingGIF from "../../assets/images/loading.gif";
 
 /* Import Service */
 import { getAllTrainers } from "../../api/trainerService";

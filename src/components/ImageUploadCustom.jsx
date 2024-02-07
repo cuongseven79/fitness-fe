@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { deleteImage, postProfile } from '../api/profileService';
 import { useParams } from 'react-router-dom';
-import imageGIF from "../images/loading.gif"
+import imageGIF from "../assets/images/loading.gif"
 
 const Image = ({ imageSource }) => (
     <div className="w-max relative">
@@ -31,7 +31,7 @@ const ImageUploader = ({
     const { id } = useParams()
     const imageSource = useMemo(() => {
         return selectedImages.length > 0 ? URL.createObjectURL(selectedImages[0]) : defaultImage;
-    }, [selectedImages]);
+    }, [selectedImages, defaultImage]);
 
     const handleImageChange = async (e) => {
         if (e.target.files) {
@@ -42,7 +42,7 @@ const ImageUploader = ({
             formData.append('image', file);
             formData.append('userId', id);
             formData.append('typeImage', typeImage);
-            const res = await postProfile(formData);
+            await postProfile(formData);
             setLoading(false);
 
         }

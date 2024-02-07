@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { getOrder } from '../../api/orderService';
 import './orderManagement.css';
-import loadingGIF from "../../images/loading.gif";
+import loadingGIF from "../../assets/images/loading.gif";
 
 const formatDate = timestamp => {
   const date = new Date(timestamp * 1000);
@@ -21,12 +21,10 @@ const ManageOrders = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const handleFilter = async () => {
+  const handleFilter = useCallback(async () => {
     if (loading) return;
-
     const filterStartDate = startDate ? startDate.getTime() / 1000 : null;
     const filterEndDate = endDate ? endDate.getTime() / 1000 : null;
-
     try {
       setLoading(true);
       const { statusCode, ordersData } = await getOrder();
@@ -45,7 +43,7 @@ const ManageOrders = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [startDate, endDate, loading]);
 
   const handleResetFilter = () => {
     setStartDate(null);
@@ -57,7 +55,7 @@ const ManageOrders = () => {
   useEffect(() => {
     document.title = 'Manage Orders';
     handleFilter();
-  }, []);
+  }, [handleFilter]);
 
   const totalMoney = filteredOrders.reduce((total, order) => total + parseFloat(order.paid_money), 0);
   const itemsPerPage = 5;

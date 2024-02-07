@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import img1 from "../images/program/yoga.png";
-import img2 from "../images/trainer2.jpg";
-import img3 from "../images/trainer3.jpg";
-import img4 from "../images/trainer4.jpg";
-import img5 from "../images/trainer5.jpg";
-import img6 from "../images/trainer6.jpg";
+import img1 from "../assets/images/program/yoga.png";
+import img2 from "../assets/images/trainer2.jpg";
+import img3 from "../assets/images/trainer3.jpg";
+import img4 from "../assets/images/trainer4.jpg";
+import img5 from "../assets/images/trainer5.jpg";
+import img6 from "../assets/images/trainer6.jpg";
 
 export const programs_img = [img1, img2, img3, img4, img5, img6];
 

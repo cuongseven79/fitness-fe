@@ -35,7 +35,7 @@
     color: var(--color-gray-200);
     line-height: 1.7;
     overflow-x: hidden;
-    background: var(--color-gray-600) url(./images/bg_texture.png);
+    background: var(--color-gray-600) url(./assets/images/bg_texture.png);
   }
 
   .container{
