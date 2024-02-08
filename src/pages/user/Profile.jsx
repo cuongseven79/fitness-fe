@@ -6,8 +6,7 @@ import { getProfile, updateProfile, updateSwitch } from "../../api/profileServic
 import { useParams } from "react-router-dom";
 import { adminCustomerRole, ptRole } from "../../utils/checkRole";
 import loadingGIF from "../../assets/images/loading.gif"
-import { message } from 'antd';
-import { Switch } from 'antd';
+import { message, Switch } from 'antd';
 
 const FormField = ({ id, label, placeholder, value, onChange }) => (
     <li className="py-3 flex justify-between items-center gap-10">
@@ -73,7 +72,7 @@ const Profile = () => {
             console.log(error)
         }
     }
-
+    
     const fetchProfile = useCallback(async () => {
         try {
             const { statusCode, user } = await getProfile(id);

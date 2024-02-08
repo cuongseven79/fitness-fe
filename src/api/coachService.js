@@ -8,3 +8,8 @@ export const getMyCoaches = async (userId) => {
 
   return response.data;
 }
+
+export const updateRating = async (rating,coachId,userId) => {
+    const response = await axios.put(API_URL + "/manage-coaches/update",{newRating:rating, coachId:coachId, userId: userId})
+  return response.data
+}
