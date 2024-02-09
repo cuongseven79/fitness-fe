@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Popconfirm, Rate, Table } from "antd";
+import { Button, Popconfirm, Rate, Table } from "antd";
 import './manage-coach.css';
 import { getMyCoaches, updateRating } from "../../api/coachService";
 import { message } from 'antd';
@@ -51,9 +51,9 @@ const ManageCoaches = () => {
                 const isRatingVisible = userSession?.rating !== true && currentDate == record.endTime;
                 return (
                     <div className={isRatingVisible ? "" : "hidden"}>
-                        <button className={!openRate ? "btn sm" : "hidden"} onClick={() => setOpenRate((prev) => !prev)}>Rating for me</button>
+                        <Button className={!openRate ? "bg-blue-500 text-white" : "hidden"} shape="round" onClick={() => setOpenRate((prev) => !prev)}>Rating to me</Button>
                         <Popconfirm title="Are you sure?" okText="Sure" okType="dashed" onCancel={() => setNewRating(0)} onConfirm={() => handleRating(record)} >
-                            <Rate className={openRate ? "" : "hidden"}  tooltips={desc} onChange={(rating) => setNewRating(rating)} value={newRating} />
+                            <Rate className={openRate ? "" : "hidden"} tooltips={desc} onChange={(rating) => setNewRating(rating)} value={newRating} />
                         </Popconfirm>
                     </div>
                 )

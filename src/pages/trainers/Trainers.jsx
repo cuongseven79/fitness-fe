@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 /* Import UI Library  */
-import { Button, Dropdown, Menu, Row, Pagination } from "antd";
+import { Button, Dropdown, Menu, Row, Pagination, Empty } from "antd";
 
 /* Import Components */
 import Card from "../../components/Card";
@@ -201,106 +201,96 @@ const Trainers = () => {
 			<Header image={HeaderImage} title="Our Trainers">
 				Adipisicing labore laboris ea sunt cillum ea velit.Adipisicing labore laboris ea sunt cillum ea velit. sunt cillum ea velit.
 			</Header>
-			<section className="trainers">
-				<div className="container">
-					<SectionHead icon={<FaCrown />} title="Trainers" />
-					<Row style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", width: "100%", margin: "30px 10px" }}>
-						<div className="button-group space-x-4">
-							<Button type="primary" style={{ background: filter === "all" ? "#0080ff" : "#4b5c988f", }} onClick={() => getAll()}>
-								<span>All</span>
+			<section className="container trainers">
+				<SectionHead icon={<FaCrown />} title="Trainers" />
+				<Row style={{ display: "flex", flexDirection: "column", justifyContent: "space-around", width: "100%", margin: "30px 10px" }}>
+					<div className="button-group space-x-4">
+						<Button type="primary" style={{ background: filter === "all" ? "#0080ff" : "#4b5c988f", }} onClick={() => getAll()}>
+							<span>All</span>
+						</Button>
+						<Dropdown overlay={ratingMenu} trigger={['click']} placement="bottomLeft">
+							<Button type="primary" style={{ background: filter === "rating" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
+								<span>Rating</span>
+								<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
 							</Button>
-							<Dropdown overlay={ratingMenu} trigger={['click']} placement="bottomLeft">
-								<Button type="primary" style={{ background: filter === "rating" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
-									<span>Rating</span>
-									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
-								</Button>
-							</Dropdown>
-							<Dropdown overlay={fieldMenu} trigger={['click']} placement="bottomLeft">
-								<Button type="primary" style={{ background: filter === "field" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
-									<span>Field</span>
-									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
-								</Button>
-							</Dropdown>
-							<Dropdown overlay={priceMenu} trigger={['click']} placement="bottomLeft">
-								<Button type="primary" style={{ background: filter === "price" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
-									<span>Price</span>
-									<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
-								</Button>
-							</Dropdown>
-						</div>
-					</Row>
-					{loading ? (
-						<div className="w-40 mt-44 mx-auto">
-							<img src={loadingGIF} alt="Loading" />
-						</div>
-					) : (
-						<div className="trainers">
-							<div className="container grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-16">
-								{paginatedList && paginatedList.length > 0 ? (
-									paginatedList.map((trainer) => (
-										<Card key={trainer.id} >
-											<div
-												onClick={() => {
-													setOpen(true);
-													setTrainerInfo(trainer);
-												}}
-												className="relative group mb-5 transition-all duration-200 hover:saturate-100 cursor-pointer">
-												<div className="w-full h-60 bg-contain">
-													<img src={trainer.photoURL} className="rounded-3xl w-full h-full" style={{ objectPosition: "10px -20px" }} alt="trainer one" />
-												</div>
-												<div className="opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full "></div>
-												<div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 ">
-													<h1 className="text-lg font-sans font-thin">View information</h1>
-												</div>
+						</Dropdown>
+						<Dropdown overlay={fieldMenu} trigger={['click']} placement="bottomLeft">
+							<Button type="primary" style={{ background: filter === "field" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
+								<span>Field</span>
+								<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
+							</Button>
+						</Dropdown>
+						<Dropdown overlay={priceMenu} trigger={['click']} placement="bottomLeft">
+							<Button type="primary" style={{ background: filter === "price" ? "#0080ff" : "#4b5c988f", textAlign: "center", display: "inline-flex", alignItems: "center", }}>
+								<span>Price</span>
+								<svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"> <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" /></svg>
+							</Button>
+						</Dropdown>
+					</div>
+				</Row>
+				{loading ? (
+					<div className="w-40 mt-44 mx-auto">
+						<img src={loadingGIF} alt="Loading" />
+					</div>
+				) : (
+					<div className="trainers ">
+						<div className={`${paginatedList && paginatedList.length > 0 ? "container grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-16" : ""}`}>
+							{paginatedList && paginatedList.length > 0 ? (
+								paginatedList.map((trainer) => (
+									<Card key={trainer.id}>
+										<div
+											onClick={() => {
+												setOpen(true);
+												setTrainerInfo(trainer);
+											}}
+											className="relative group mb-5 transition-all duration-200 hover:saturate-100 cursor-pointer">
+											<div className="w-full h-60 bg-contain">
+												<img src={trainer.photoURL} className="rounded-3xl w-full h-full" style={{ objectPosition: "10px -20px" }} alt="trainer one" />
 											</div>
-											<h3 className="text-[20px] text-[#EAB308] font-semibold">
-												{trainer.displayName}
-											</h3>
-											<p>{trainer.field}</p>
-											<div className="my-3 flex justify-center items-center text-[18px] space-x-12">
-												<h1 className="font-semibold text-2xl">{`$ ${trainer.price}`}</h1>
-												<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent">
-													<option value="">1 month</option>
-													<option value="">2 month</option>
-													<option value="">3 month</option>
-												</select>
+											<div className="opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full "></div>
+											<div className="absolute top-0 left-0 w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 ">
+												<h1 className="text-lg font-sans font-thin">View information</h1>
 											</div>
-											<div className="flex justify-center mb-5">
-												{trainer.rating > 0 &&
-													Array(Math.round(trainer.rating)).fill(<AiFillStar color="yellow" />)}
-											</div>
-											<button onClick={() => setTrainerInfo(trainer)} className="btn md">Booking</button>
-										</Card>
-									))
-								) : (
-									<div className="text-white text-[20px]">
-										No coach information found
-									</div>
-								)}
-							</div>
+										</div>
+										<h3 className="text-[20px] text-[#EAB308] font-semibold">
+											{trainer.displayName}
+										</h3>
+										<p>{trainer.field}</p>
+										<div className="my-3 flex justify-center items-center text-[18px] space-x-12">
+											<h1 className="font-semibold text-2xl">{`$ ${trainer.price}`}</h1>
+											<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent">
+												<option value="">1 month</option>
+												<option value="">2 month</option>
+												<option value="">3 month</option>
+											</select>
+										</div>
+										<div className="flex justify-center mb-5">
+											{trainer.rating > 0 &&
+												Array(Math.round(trainer.rating)).fill(<AiFillStar color="yellow" />)}
+										</div>
+										<button onClick={() => setTrainerInfo(trainer)} className="btn md">Booking</button>
+									</Card>
+								))
+							) : (
+								<Empty description="" children={<h1>No coach information found</h1>} />
+							)}
 						</div>
-					)}
-					<Pagination
-						style={{ margin: "30px 0", display: "flex", justifyContent: "center", }}
-						current={currentPage}
-						pageSize={pageSize}
-						total={sortedList.length}
-						onChange={handlePaginationChange}
-						prevIcon={<LeftOutlined style={{ color: '#ffcc00' }} />}
-						nextIcon={<RightOutlined style={{ color: '#ffcc00' }} />}
-						itemRender={(current, type, originalElement) => {
-							if (type === 'prev' || type === 'next') {
-								return originalElement;
-							}
-							if (type === 'page') {
-								return (
-									<a style={{ color: '#ffcc00' }} href={`#${current}`}>{current}</a>
-								);
-							}
-							return originalElement;
-						}}
-					/>
-				</div>
+					</div>
+				)}
+				<Pagination
+					style={{ margin: "30px 0", display: "flex", justifyContent: "center", }}
+					current={currentPage}
+					pageSize={pageSize}
+					total={sortedList.length}
+					onChange={handlePaginationChange}
+					prevIcon={<LeftOutlined style={{ color: '#ffcc00' }} />}
+					nextIcon={<RightOutlined style={{ color: '#ffcc00' }} />}
+					itemRender={(current, type, originalElement) => {
+						if (type === 'prev' || type === 'next') return originalElement;
+						if (type === 'page') return <a style={{ color: '#ffcc00' }} href={`#${current}`}>{current}</a>
+						return originalElement;
+					}}
+				/>
 				<TrainerModal open={open} setOpen={setOpen} trainer={trainerInfo} />
 			</section>
 		</>

@@ -1,3 +1,9 @@
+.empty .empty-description {
+    color:red;  
+} 
+:where(.css-dev-only-do-not-override-1rqnfsa).empty .empty-description {
+    color:red;  
+}
 .trainers__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -71,4 +77,3 @@
     width: 60%;
     margin: 20px 10px;
   }
-  

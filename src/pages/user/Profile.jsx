@@ -8,10 +8,10 @@ import { adminCustomerRole, ptRole } from "../../utils/checkRole";
 import loadingGIF from "../../assets/images/loading.gif"
 import { message, Switch } from 'antd';
 
-const FormField = ({ id, label, placeholder, value, onChange }) => (
+const FormField = ({ warning, id, label, placeholder, value, onChange }) => (
     <li className="py-3 flex justify-between items-center gap-10">
         <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
-        <input type="text" id={id} value={value} onChange={onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} />
+        <input type="text" id={id} value={value} onChange={onChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} required />
     </li>
 );
 
@@ -60,7 +60,7 @@ const Profile = () => {
             setLoading(false);
         }
     }
-    
+
     const handleSwitching = async (newStatus) => {
         try {
             setChecked(newStatus);
@@ -72,7 +72,7 @@ const Profile = () => {
             console.log(error)
         }
     }
-    
+
     const fetchProfile = useCallback(async () => {
         try {
             const { statusCode, user } = await getProfile(id);
@@ -114,9 +114,10 @@ const Profile = () => {
                         <FormField id="gender" label="Gender:" placeholder={profile.gender} value={formData.gender} onChange={handleChange} />
                         <FormField id="age" label="Age" placeholder={profile.age} value={formData.age} onChange={handleChange} />
                         {ptRole && <FormField id="experience" label="Year of Experiences" placeholder={profile.experience} value={formData.experience} onChange={handleChange} />}
+                        {ptRole && <FormField id="field" label="Field" placeholder={profile.field} value={formData.field} onChange={handleChange} />}
                         <FormField id="phoneNumber" label="Phone Number" placeholder={profile.phoneNumber} value={formData.phoneNumber} onChange={handleChange} />
                         <FormField id="address" label="Address" placeholder={profile.address} value={formData.address} onChange={handleChange} />
-                        {ptRole && <FormField id="price" label="Price" placeholder={profile.price} value={formData.price} onChange={handleChange} />}
+                        {ptRole && <FormField warning id="price" label="Price" placeholder={profile.price} value={formData.price} onChange={handleChange} />}
                     </div>
                     <ImageUploader defaultImage={`${profile.photoURL ? profile.photoURL : UserDefaultImage}`} typeImage={"photo"} />
                 </div>
