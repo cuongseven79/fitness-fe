@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import { updateProfile } from "../../api/profileService";
-import { ptRole, userSession } from "../../utils/checkRole";
+import { ptRole } from "../../utils/checkRole";
 import { message, Button, Input, Form, InputNumber, Select } from 'antd';
 import { useAuth } from "../../context/AuthContext";
 
@@ -10,8 +10,6 @@ export const ProfileForm = memo(({ profile, id, setDisabledSwitch }) => {
     const [loading, setLoading] = useState(false); // set loading button save when clicked
     const [disabledBtn, setDisableBtn] = useState(true); // disabled button save
     const { setCurrentUser } = useAuth();
-    const [formData, setFormData] = useState({});
-
 
     /* Using: Handle form values change */
     useEffect(() => {
@@ -24,18 +22,13 @@ export const ProfileForm = memo(({ profile, id, setDisabledSwitch }) => {
             }
         }).catch(() => {
             setDisableBtn(true);
-
-            //Save lại để validation form data.
-            setFormData(values);
-        });
-    }, [values]); //Form data
+        })
+    }, [form, values, setDisabledSwitch, profile.price]); //Form data
     const handleSubmit = async () => {
         setLoading(true);
         try {
-            validFormValues(values);
             await updateProfile(values, id);
             setDisabledSwitch(false);
-
 
             //Set Form data lưu tạm vào state để set displayName vào SessionStorage ở <NavBar/>.
             setCurrentUser(values)
@@ -48,18 +41,12 @@ export const ProfileForm = memo(({ profile, id, setDisabledSwitch }) => {
             setLoading(false);
         }
     }
-    const validFormValues = (values) => {
-        if (values.yearsOfExp >= values.age) {
-            return message.error('Years Of experience is invalid! please check again!');
-        }
-    }
-    // console.log("formData", formData.age)
     return (
         <Form form={form} name="validateOnly" layout="row" autoComplete="off" variant="filled" onFinish={handleSubmit} >
             <Form.Item name='email' label="Email" rules={[{ required: true },]} initialValue={profile.email}>
                 <Input disabled />
             </Form.Item>
-            <Form.Item name="displayName" validateTrigger="onBlur" hasFeedback label="Display Name" rules={[{ required: true, message: 'Please input your display name!' },]} initialValue={profile.displayName} >
+            <Form.Item name="displayName" validateTrigger="onBlur" hasFeedback label="Display Name" rules={[{ required: true, message: 'Please input your display name!' },]} initialValue={profile?.displayName} >
                 <Input name="displayName" />
             </Form.Item>
             <Form.Item name="gender" label="Gender" validateTrigger="onBlur" hasFeedback rules={[{ required: true, message: "Please input your gender!" },]} initialValue={profile.gender} >

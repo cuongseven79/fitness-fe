@@ -9,15 +9,13 @@ import DropdownCustom from "./DropdownCustom";
 import { useAuth } from "../context/AuthContext";
 
 const NavItem = ({ name, path, handleNavToggle }) => (
-	<li>
-		<NavLink
-			to={path}
-			className={({ isActive }) => (isActive ? "active-nav" : "")}
-			onClick={handleNavToggle}
-		>
-			{name}
-		</NavLink>
-	</li>
+	<NavLink
+		to={path}
+		className={({ isActive }) => (isActive ? "active-nav" : "")}
+		onClick={handleNavToggle}
+	>
+		{name}
+	</NavLink>
 );
 
 const Navbar = () => {
@@ -27,7 +25,7 @@ const Navbar = () => {
 	const userSession = JSON.parse(sessionStorage.getItem('user'))
 
 	//Update session data to display displayName on Navbar
-	if (currentUser?.displayName !== userSession.displayName) {
+	if (currentUser?.displayName !== userSession?.displayName) {
 		userSession.displayName = currentUser?.displayName;
 		sessionStorage.setItem('user', JSON.stringify(userSession));
 	}
@@ -90,7 +88,9 @@ const Navbar = () => {
 				</Link>
 				<ul className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}>
 					{links.map(({ name, path, id }) => (
-						<NavItem key={id} name={name} path={path} handleNavToggle={handleNavToggle} />
+						<li key={id}>
+							<NavItem name={name} path={path} handleNavToggle={handleNavToggle} />
+						</li>
 					))}
 				</ul>
 				<div>
