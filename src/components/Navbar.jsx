@@ -6,6 +6,7 @@ import { FaBars } from 'react-icons/fa';
 import { MdOutlineClose } from "react-icons/md";
 import "./navbar.css";
 import DropdownCustom from "./DropdownCustom";
+import { useAuth } from "../context/AuthContext";
 
 const NavItem = ({ name, path, handleNavToggle }) => (
 	<li>
@@ -21,7 +22,16 @@ const NavItem = ({ name, path, handleNavToggle }) => (
 
 const Navbar = () => {
 	const [isNavShowing, setIsNavShowing] = useState(false);
-	const userSession = JSON.parse(sessionStorage.getItem('user'));
+
+	const { currentUser } = useAuth();
+	const userSession = JSON.parse(sessionStorage.getItem('user'))
+
+	//Update session data to display displayName on Navbar
+	if (currentUser?.displayName !== userSession.displayName) {
+		userSession.displayName = currentUser?.displayName;
+		sessionStorage.setItem('user', JSON.stringify(userSession));
+	}
+
 	const getDropDownItems = () => {
 		const restItems = [
 			{

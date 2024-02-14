@@ -1,5 +1,5 @@
 import React from "react";
-import { GiWeightLiftingUp, GiBoxingGlove } from "react-icons/gi";
+import { GiWeightLiftingUp, GiBoxingGlove, GiBasketballBall } from "react-icons/gi";
 import { LiaDumbbellSolid } from "react-icons/lia";
 import { GiHighPunch } from "react-icons/gi";
 import { GrYoga } from "react-icons/gr";
@@ -40,7 +40,7 @@ export const programs = [
     {
         id: 1,
         icon: <GiWeightLiftingUp />,
-        title: "Weight Lifting",
+        title: "Gym",
         desc: "Có hơn 80+ trainer với kinh nghiệm dày dặn đang giảng dạy trên nền tảng Fitness Online."
     },
     {
@@ -51,8 +51,8 @@ export const programs = [
     },
     {
         id: 3,
-        icon: <GrYoga />,
-        title: "Pilates ",
+        icon: <GiBasketballBall />,
+        title: "Basketball ",
         desc: "Tổng số học viên đang theo học tại Fitness Online."
     },
     {
@@ -63,8 +63,8 @@ export const programs = [
     },
     {
         id: 5,
-        icon: <LiaDumbbellSolid/>,
-        title: "Weight training",
+        icon: <GrYoga/>,
+        title: "Aerobics",
         desc: "Dộ tuổi trung bình của trainer là 30 tuổi."
     },
     {
