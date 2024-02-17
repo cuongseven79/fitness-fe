@@ -8,7 +8,10 @@
     display: block;
 }
 
-.MuiDialog-paperWidthLg{
-    width: 400px;
-    padding: 20px 20px 40px 20px;
+.ant-modal-content{
+    padding-bottom: 30px !important;
+}
+
+.ant-modal-close-x{
+    display: none !important;
 }

@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPaymentResult } from '../../api/invoiceService';
 import './payment.css';
-import {
-	Dialog,
-	DialogTitle,
-	DialogContent,
-	DialogActions,
-} from '@material-ui/core';
+import { Modal } from 'antd';
 
 export const Payment = () => {
 	const [showDialog, setShowDialog] = useState(true);
@@ -71,32 +66,29 @@ export const Payment = () => {
 	return (
 		<section>
 			<div className="container notify__container py-10">
-				<Dialog open={showDialog} maxWidth="lg">
-					{loading ? (
-						<>
-							<DialogTitle>Loading...</DialogTitle>
-							<DialogContent>
-								<div className="text-center">
-									<span>Wait a minute...</span>
-								</div>
-							</DialogContent>
-						</>
-					) : (
-						<>
-							<DialogTitle>{modalTitle}</DialogTitle>
-							<DialogContent>
-								<div className="text-center">
-									<span>{modalBody}</span>
-								</div>
-							</DialogContent>
-							<DialogActions>
+				<Modal
+					title={loading ? 'Loading...' : modalTitle}
+					open={showDialog}
+					footer={
+						!loading && (
+							<div className="text-center">
 								<Link to="/" className="btn">
 									Go back Home
 								</Link>
-							</DialogActions>
-						</>
+							</div>
+						)
+					}
+				>
+					{loading ? (
+						<div className="text-center">
+							<span>Wait a minute...</span>
+						</div>
+					) : (
+						<div className="text-center">
+							<span>{modalBody}</span>
+						</div>
 					)}
-				</Dialog>
+				</Modal>
 			</div>
 		</section>
 	);
