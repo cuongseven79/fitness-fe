@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import Profile from "./pages/user/Profile";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
+import Payment from "./pages/payment/Payment";
 
 // check Role
 import { userSession } from "./utils/checkRole";
@@ -53,6 +54,8 @@ const App = () => {
 				<Route path="login" element={<Login />} />
 				<Route path="signup" element={<SignUp />} />
 				<Route path="*" element={<NotFound />} />
+				<Route path="payment/callback" element={<Payment />} />
+
 			</Routes>
 			<Footer />
 		</BrowserRouter>
