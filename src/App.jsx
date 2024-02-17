@@ -22,10 +22,17 @@ import { useAuth } from "./context/AuthContext";
 import ManageCoaches from "./pages/manage-coaches/ManageCoach";
 import ManageCustomer from "./pages/manage-customers/ManageCustomer";
 
+// import ChatBot
+import { Chatbot } from "./config/kommunication-config"
+
+
+
+
 const App = () => {
 	const { setCurrentUser } = useAuth()
 	useEffect(() => {
 		setCurrentUser(userSession)
+		Chatbot();
 	}, [setCurrentUser]);
 	return (
 		<BrowserRouter>
