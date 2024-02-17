@@ -82,7 +82,7 @@ function SignUp() {
 	}
 
 	return (
-		<div className="mx-auto py-10 rounded-3xl bg-white mt-36 w-1/3">
+		<div className="mx-auto  py-10 rounded-3xl bg-white mt-36 sm:w-2/3 md:w-2/3 lg:w-1/2 xl:w-1/3">
 			<form onSubmit={handleSubmit} className="mx-10 flex flex-col justify-center items-center">
 				<InputField id="displayName" type="text" placeholder="Display Name" value={formData.displayName} onChange={handleFormChange} />
 				<InputField id="phoneNumber" type="text" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleFormChange} />

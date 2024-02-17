@@ -82,8 +82,8 @@ const Navbar = () => {
 	}
 	return (
 		<nav>
-			<div className="container nav__container">
-				<Link to="/" className="w-20" onClick={handleNavToggle}>
+			<div className="container nav__container px-5">
+				<Link to="/" className="w-20">
 					<img src={Logo} alt="Nav-logo" className="rounded-md" />
 				</Link>
 				<ul className={`nav__links ${isNavShowing ? "show__nav" : "hide__nav"}`}>

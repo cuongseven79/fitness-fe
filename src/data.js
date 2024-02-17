@@ -1,6 +1,5 @@
 import React from "react";
 import { GiWeightLiftingUp, GiBoxingGlove, GiBasketballBall } from "react-icons/gi";
-import { LiaDumbbellSolid } from "react-icons/lia";
 import { GiHighPunch } from "react-icons/gi";
 import { GrYoga } from "react-icons/gr";
 import { TbYoga } from "react-icons/tb";

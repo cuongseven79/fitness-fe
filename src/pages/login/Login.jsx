@@ -66,7 +66,7 @@ function Login() {
     }
 
     return (
-        <div className="mx-auto py-10 rounded-3xl bg-white mt-40 w-1/3">
+        <div className=" py-10 rounded-3xl mt-40 sm:w-1/2 md:w-1/2 lg:w-1/3 bg-white mx-auto">
             <form onSubmit={handleSubmit} className="mx-10 flex flex-col justify-center items-center">
                 <InputField id="email" type="email" placeholder="E-Mail Address" value={formData.email} onChange={handleFormChange} />
                 <InputField id="password" type="password" placeholder="Password" value={formData.password} onChange={handleFormChange} />
