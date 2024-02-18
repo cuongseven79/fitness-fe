@@ -23,7 +23,7 @@ const ManageUsers = () => {
   const userListColumn = [
     { title: "DisplayName", dataIndex: "displayName" },
     { title: "Gender", dataIndex: "gender" },
-    { title: "Birthday", dataIndex: "birthday" },
+    { title: "Age", dataIndex: "age" },
     { title: "Phone Number", dataIndex: "phoneNumber" },
     { title: "Role", dataIndex: "role" },
     { title: "Start-time", dataIndex: "startTime" },

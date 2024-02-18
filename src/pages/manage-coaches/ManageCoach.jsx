@@ -36,11 +36,10 @@ const ManageCoaches = () => {
         });
     };
 
-    const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
     const userListColumn = [
         { title: "Coach Name", dataIndex: "displayName" },
         { title: "Gender", dataIndex: "gender" },
-        { title: "Birthday", dataIndex: "birthday" },
+        { title: "Age", dataIndex: "age" },
         { title: "Phone Number", dataIndex: "phoneNumber" },
         { title: "Field", dataIndex: "field" },
         { title: "Start-time", dataIndex: "startTime" },
@@ -52,8 +51,8 @@ const ManageCoaches = () => {
                 return (
                     <div className={isRatingVisible ? "" : "hidden"}>
                         <Button className={!openRate ? "bg-blue-500 text-white" : "hidden"} shape="round" onClick={() => setOpenRate((prev) => !prev)}>Rating to me</Button>
-                        <Popconfirm title="Are you sure?" okText="Sure" okType="dashed" onCancel={() => setNewRating(0)} onConfirm={() => handleRating(record)} >
-                            <Rate className={openRate ? "" : "hidden"} tooltips={desc} onChange={(rating) => setNewRating(rating)} value={newRating} />
+                        <Popconfirm title="Are you sure?" okText="Sure" okType="dashed" onCancel={() => setNewRating(0)} onConfirm={() => handleRating(record)} className="flex" >
+                            <Rate className={openRate ? "" : "hidden"} onChange={(rating) => setNewRating(rating)} value={newRating} />
                         </Popconfirm>
                     </div>
                 )

@@ -10,7 +10,7 @@ const ManageCustomers = () => {
   const userListColumn = [
     { title: "Customer Name", dataIndex: "displayName" },
     { title: "Gender", dataIndex: "gender" },
-    { title: "Birthday", dataIndex: "birthday" },
+    { title: "Age", dataIndex: "age" },
     { title: "Phone Number", dataIndex: "phoneNumber" },
     { title: "Start-time", dataIndex: "startTime" },
     { title: "End-time", dataIndex: "endTime" },
