@@ -18,37 +18,12 @@ const Footer = () => {
 						A3 - Hong Phat, Ninh Kieu district, Can Tho city, Vietnam
 					</p>
 					<div className="footer__socials">
-						<a
-							href="https://www.linkedin.com/in/tran-gia-cuong-908724216/"
-							target="_blank"
-							rel="noreferrer noopener"
-						>
-							<FaLinkedin />
-						</a>
-						<a
-							href="https://facebook.com/"
-							target="_blank"
-							rel="noreferrer noopener"
-						>
-							<FaFacebookF />
-						</a>
-						<a
-							href="https://twitter.com/"
-							target="_blank"
-							rel="noreferrer noopener"
-						>
-							<AiOutlineTwitter />
-						</a>
-						<a
-							href="https://instagram.com/"
-							target="_blank"
-							rel="noreferrer noopener"
-						>
-							<AiFillInstagram />
-						</a>
+						<a href="https://www.linkedin.com/in/tran-gia-cuong-908724216/" target="_blank" rel="noreferrer noopener"><FaLinkedin /></a>
+						<a href="https://facebook.com/" target="_blank" rel="noreferrer noopener"><FaFacebookF /></a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener"><AiOutlineTwitter /></a>
+						<a href="https://instagram.com/" target="_blank" rel="noreferrer noopener"><AiFillInstagram /></a>
 					</div>
 				</article>
-				<article>
+				<article className="hidden">
 					<h4>Permalinks</h4>
 					<Link to="/about">About</Link>
 					<Link to="/plans">Plans</Link>

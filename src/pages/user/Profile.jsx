@@ -61,7 +61,7 @@ const Profile = () => {
                     <Switch disabled={disabledSwitch} checkedChildren="Available" unCheckedChildren="Busy" value={checked} className="bg-gray-500" onClick={() => handleSwitching(!checked)} />
                 </div>}
             </div>
-            <div className="flex justify-evenly">
+            <div className="flex flex-col-reverse md:flex-row justify-evenly items-center">
                 <ProfileForm profile={profile} id={id} setDisabledSwitch={setDisabledSwitch} />
                 <ImageUploaderMemo defaultImage={`${profile.photoURL ? profile.photoURL : UserDefaultImage}`} typeImage={"photo"} />
             </div>

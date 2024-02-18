@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import HeaderImage from "../../assets/images/header_bg_4.jpg";
 import Card from '../../components/Card';
 import { createPayment } from '../../api/invoiceService';
+import { useNavigate } from 'react-router-dom';
 
 function convertUSDtoVND(amountUSD) {
 	const amountVND = amountUSD * 24000;
@@ -13,6 +14,7 @@ function convertUSDtoVND(amountUSD) {
 }
 
 const Plans = () => {
+	const navigate = useNavigate();
 	useEffect(() => {
 		document.title = `Plants`;
 	}, []);
@@ -29,7 +31,7 @@ const Plans = () => {
 				return;
 			}
 		} else {
-			window.location.href = 'http://localhost:3000/login';
+			navigate('/login');
 		}
 	}
 	return (
