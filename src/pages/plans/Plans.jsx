@@ -53,7 +53,7 @@ const Plans = () => {
 						</p>
 					</div>
 					<span className='max-lg:hidden'>
-						<img src={HeaderImage} className='rounded-3xl' alt='' />
+						<img src={HeaderImage} className='rounded-3xl' alt="" />
 					</span>
 				</div>
 				<div className='container plans__container'>

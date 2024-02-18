@@ -38,8 +38,8 @@ export const Payment = () => {
 			res.RspCode === '99'
 				? setModalBody('Payment existed!')
 				: res.RspCode === '97'
-				? setModalBody('You cannnot pay. Because you are booking PT.')
-				: setModalBody('Payment failed!');
+					? setModalBody('You cannnot pay. Because you are booking PT.')
+					: setModalBody('Payment failed!');
 		}
 		setShowDialog(true);
 		setLoading(false);
@@ -47,13 +47,10 @@ export const Payment = () => {
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const getQueryResult = () => {
-		const vpnReturn = 'http://localhost:3000/payment/callback?';
 		const currentUrl = window.location.href;
-
-		const query = currentUrl.replace(vpnReturn, '');
-		const params = new URLSearchParams(query);
+		const urlParams = new URLSearchParams(currentUrl.split("?")[1]);
 		const result = {};
-		params.forEach((value, key) => {
+		urlParams.forEach((value, key) => {
 			if (value.includes('%')) {
 				// Decode encoded values
 				value = decodeURIComponent(value);
