@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 /* Import UI Library  */
 import { Button, Dropdown, Menu, Row, Pagination, Empty } from "antd";
+import { useNavigate } from 'react-router-dom';
 
 /* Import Components */
 import Card from "../../components/Card";
@@ -19,6 +20,7 @@ import loadingGIF from "../../assets/images/loading.gif";
 
 /* Import Service */
 import { getAllTrainers } from "../../api/trainerService";
+import { createPaymentBooking } from '../../api/bookingService';
 
 const paginate = (items, currentPage, pageSize) => {
 	if (!items) return [];
@@ -67,7 +69,15 @@ const TrainerModal = ({ open, setOpen, trainer }) => {
 		</ModalCustom>
 	);
 };
+
+function convertUSDtoVND(amountUSD) {
+	const amountVND = amountUSD * 24000;
+	const roundedAmountVND = Math.round(amountVND * 100) / 100;
+	return roundedAmountVND;
+}
+
 const Trainers = () => {
+	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [users, setUsers] = useState([]);
 	const [sortedList, setSortedList] = useState([]);
@@ -77,6 +87,8 @@ const Trainers = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [loading, setLoading] = useState(false);
 	const pageSize = 6;
+	const [showButton, setShowButton] = useState(false);
+
 
 	useEffect(() => {
 		fetchData();
@@ -95,7 +107,32 @@ const Trainers = () => {
 		} finally {
 			setLoading(false);
 		}
+		onCheckNotCustomer();
 	};
+
+	const onCheckNotCustomer = async () => {
+		const getInfoUser = JSON.parse(sessionStorage.getItem('user'));
+		if (getInfoUser?.role === 'customer' || !getInfoUser) {
+			setShowButton(true);
+		}
+	}
+
+	async function handleClickBooking(e, trainerInfo) {
+		e.preventDefault();
+		const name = `booking-${trainerInfo.displayName}`
+		const getInfoUser = JSON.parse(sessionStorage.getItem('user'));
+		const vndPrice = convertUSDtoVND(trainerInfo.price);
+		if (getInfoUser) {
+			const res = await createPaymentBooking({ name, vndPrice });
+			if (res.url) {
+				window.location.replace(res.url);
+			} else {
+				return;
+			}
+		} else {
+			navigate('/login');
+		}
+	}
 
 	const priceIntervals = {
 		1: { min: 0, max: 2000 },
@@ -268,7 +305,11 @@ const Trainers = () => {
 											{trainer.rating > 0 &&
 												Array(Math.round(trainer.rating)).fill(<AiFillStar color="yellow" />)}
 										</div>
-										<button onClick={() => setTrainerInfo(trainer)} className="btn md">Booking</button>
+										{
+											showButton && (
+												<button onClick={(e) => handleClickBooking(e, trainer)} className="btn md">Booking</button>
+											)
+										}
 									</Card>
 								))
 							) : (

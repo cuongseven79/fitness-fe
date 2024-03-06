@@ -47,6 +47,7 @@ const TrainersPopular = () => {
 	const [open, setOpen] = useState(false)
 	const [trainers, setTrainers] = useState([])
 	const [trainerInfor, setTrainerInfor] = useState(null)
+	const [showButton, setShowButton] = useState(false);
 
 	function handleClickOnTrainer(trainer) {
 		setOpen(true);
@@ -58,10 +59,19 @@ const TrainersPopular = () => {
 		if (statusCode === 200) {
 			setTrainers(trainers)
 		}
+		onCheckNotCustomer();
 	}
+
 	useEffect(() => {
 		fetchTrainer();
 	}, [])
+
+	const onCheckNotCustomer = async () => {
+		const getInfoUser = JSON.parse(sessionStorage.getItem('user'));
+		if (getInfoUser?.role === 'customer' || !getInfoUser) {
+			setShowButton(true);
+		}
+	}
 
 	if (!trainers.length) {
 		return <div className="flex justify-center ">
@@ -99,7 +109,13 @@ const TrainersPopular = () => {
 									<div className="flex justify-center mb-5">
 										{Array(Math.round(trainer.rating)).fill(<AiFillStar color="yellow" />)}
 									</div>
-									<Link to={"plans"} className="btn md">Booking</Link>
+									{
+										showButton && (
+											<Link to={"plans"} className="btn md">
+												Booking
+											</Link>
+										)
+									}
 								</Card>
 							);
 						})}
