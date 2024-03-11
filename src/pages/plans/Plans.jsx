@@ -16,7 +16,7 @@ function convertUSDtoVND(amountUSD) {
 const Plans = () => {
 	const navigate = useNavigate();
 	useEffect(() => {
-		document.title = `Plants`;
+		document.title = `Plans`;
 	}, []);
 
 	async function handleClickPlan(e, name, price) {
