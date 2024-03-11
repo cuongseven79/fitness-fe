@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getPaymentResult } from '../../api/invoiceService';
+import { getPaymentResultBooking } from '../../api/bookingService';
 import './payment.css';
 import { Modal } from 'antd';
 
@@ -26,20 +27,35 @@ export const Payment = () => {
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const fetchResultPayment = async () => {
+		const currentUrl = window.location.href;
 		const getInfoUser = JSON.parse(sessionStorage.getItem('user'));
 		const userId = getInfoUser.userId;
 		const userName = getInfoUser.displayName;
-		const res = await getPaymentResult(queryResult, userId, userName);
-		if (res.RspCode === '00') {
-			setModalTitle('Success');
-			setModalBody('Payment success!');
-		} else {
-			setModalTitle('Error');
-			res.RspCode === '99'
-				? setModalBody('Payment existed!')
-				: res.RspCode === '97'
-					? setModalBody('You cannnot pay. Because you are booking PT.')
+		if (currentUrl.includes('booking')) {
+			const res = await getPaymentResultBooking(queryResult, userId, userName)
+			if (res.RspCode === '00') {
+				setModalTitle('Success');
+				setModalBody('Booking success!');
+			} else {
+				setModalTitle('Error');
+				res.RspCode === '99'
+					? setModalBody('Payment existed!')
 					: setModalBody('Payment failed!');
+			}
+		}
+		else {
+			const res = await getPaymentResult(queryResult, userId, userName);
+			if (res.RspCode === '00') {
+				setModalTitle('Success');
+				setModalBody('Payment success!');
+			} else {
+				setModalTitle('Error');
+				res.RspCode === '99'
+					? setModalBody('Payment existed!')
+					: res.RspCode === '97'
+						? setModalBody('You cannnot pay. Because you are booking PT.')
+						: setModalBody('Payment failed!');
+			}
 		}
 		setShowDialog(true);
 		setLoading(false);
