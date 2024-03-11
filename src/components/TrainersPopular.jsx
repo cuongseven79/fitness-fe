@@ -111,7 +111,7 @@ const TrainersPopular = () => {
 									</div>
 									{
 										showButton && (
-											<Link to={"plans"} className="btn md">
+											<Link to={"trainers"} className="btn md">
 												Booking
 											</Link>
 										)

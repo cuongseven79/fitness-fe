@@ -29,10 +29,10 @@ const ManageOrders = () => {
       setLoading(true);
       const { statusCode, ordersData } = await getOrder();
       if (ordersData && statusCode === 200) {
-        const sortedOrders = ordersData.sort((a, b) => a.date._seconds - b.date._seconds);
+        const sortedOrders = ordersData.sort((a, b) => a.date?._seconds - b.date?._seconds);
         setAllOrders(sortedOrders);
         setFilteredOrders(sortedOrders.filter(order => {
-          const orderTimestamp = order.date._seconds;
+          const orderTimestamp = order.date?._seconds;
           if (filterStartDate && orderTimestamp < filterStartDate) return false;
           if (filterEndDate && orderTimestamp > filterEndDate) return false;
           return true;
@@ -55,7 +55,7 @@ const ManageOrders = () => {
   useEffect(() => {
     document.title = 'Manage Orders';
     handleFilter();
-  }, [handleFilter]);
+  }, []);
 
   const totalMoney = filteredOrders.reduce((total, order) => total + parseFloat(order.paid_money), 0);
   const itemsPerPage = 5;
@@ -125,11 +125,11 @@ const ManageOrders = () => {
                   <tr key={order.order_id}>
                     <td>{startIndex + index + 1}</td>
                     <td>{order.displayName}</td>
-                    <td>{formatDate(order.date._seconds)}</td>
+                    <td>{order.date?._seconds ? formatDate(order.date?._seconds) : order?.date}</td>
                     <td>{order.order_id}</td>
                     <td>{order.service_type}</td>
-                    <td>{formatDate(order.start_time._seconds)}</td>
-                    <td>{formatDate(order.end_time._seconds)}</td>
+                    <td>{order.start_time?._seconds ? formatDate(order.start_time?._seconds) : order?.date}</td>
+                    <td>{formatDate(order.end_time?._seconds)}</td>
                     <td>{order.paid_money}</td>
                   </tr>
                 ))}
