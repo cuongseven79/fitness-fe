@@ -88,7 +88,7 @@ const Trainers = () => {
 	const [loading, setLoading] = useState(false);
 	const pageSize = 6;
 	const [showButton, setShowButton] = useState(false);
-
+	const [selectedMonth, setSelectedMonth] = useState(1);
 
 	useEffect(() => {
 		fetchData();
@@ -121,7 +121,7 @@ const Trainers = () => {
 		e.preventDefault();
 		const name = `booking-${trainerInfo.displayName}`
 		const getInfoUser = JSON.parse(sessionStorage.getItem('user'));
-		const vndPrice = convertUSDtoVND(trainerInfo.price);
+		const vndPrice = convertUSDtoVND(trainerInfo.price * selectedMonth);
 		if (getInfoUser) {
 			const res = await createPaymentBooking({ name, vndPrice });
 			if (res.url) {
@@ -203,6 +203,12 @@ const Trainers = () => {
 		setCurrentPage(page);
 		setFilter("all");
 	};
+
+	const handleSelectChange = (event) => {
+		const selectedValue = parseInt(event.target.value);
+		setSelectedMonth(selectedValue);
+	};
+
 	const ratingMenu = (
 		<Menu onClick={handleRatingClick}>
 			<Menu.Item key="1" className={selectedMenuItem === "1" ? "selected" : ""}>1 star</Menu.Item>
@@ -295,10 +301,10 @@ const Trainers = () => {
 										<p>{trainer.field}</p>
 										<div className="my-3 flex justify-center items-center text-[18px] space-x-12">
 											<h1 className="font-semibold text-2xl">{`$ ${trainer.price}`}</h1>
-											<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent">
-												<option value="">1 month</option>
-												<option value="">2 month</option>
-												<option value="">3 month</option>
+											<select className="border px-1 py-1 cursor-pointer rounded-md text-[#EAB308] bg-transparent" onChange={handleSelectChange}>
+												<option value="1">1 month</option>
+												<option value="2">2 month</option>
+												<option value="3">3 month</option>
 											</select>
 										</div>
 										<div className="flex justify-center mb-5">
